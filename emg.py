@@ -26,6 +26,9 @@ def launch():
 		sig_ax[2, 2].clear()
 		cnt = dict(Counter(data_label[offset:offset+size])).items()
 		sig_ax[2, 2].pie([i[1] for i in cnt], labels=[i[0] for i in cnt])
+		for i in range(8):
+			sig_ax[i // 3, i % 3].set_title(f"Channel {i+1}")
+		sig_ax[2, 2].set_title("Labels")
 		sig_plot.draw()
 
 	controls = tkinter.Frame(master=root)
@@ -40,7 +43,7 @@ def launch():
 		nonlocal size
 		size = size_slide.get()
 		draw_sig()
-	size_slide = tkinter.Scale(master=controls, label="Size", from_=1, to_=1, command=size_event, state="disabled", orient="horizontal", length=500)
+	size_slide = tkinter.Scale(master=controls, label="Size", from_=1, to_=1000, command=size_event, state="disabled", orient="horizontal", length=500)
 
 	def load_event():
 		nonlocal data_sig, data_label, offset, size
